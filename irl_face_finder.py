@@ -15,6 +15,7 @@ def detect_bounding_box(vid):
     return faces
 
 
+face_found = False
 while True:
     
     result, video_frame = video_capture.read()  # read frames from the video
@@ -24,6 +25,15 @@ while True:
     faces = detect_bounding_box(
         video_frame
     )  # apply the function we created to the video frame
+
+    if len(faces) > 0:
+        if face_found == False:
+            print("Face Found!")
+            face_found = True
+    else:
+        if face_found:
+            print("No Face found")
+            face_found = False
 
     cv2.imshow(
         "My Face Detection Project", video_frame
